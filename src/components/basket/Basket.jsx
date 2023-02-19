@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
-import { deleteBasketItem, updateBasketItem } from "../../store/basket/basketReducer";
+import { deleteBasketItem, updateBasketItem } from "../../store/basket/basketSlice";
 import Modal from "../UI/Modal";
 import BasketItem from "./BasketItem";
 import TotalAmount from "./TotalAmount";

@@ -2,8 +2,7 @@ import React, { useCallback, useContext, useState } from 'react'
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import {ReactComponent as PlusIcon} from '../../../assets/icons/plus-icon.svg'
-import { addToBasket } from '../../../store/basket/basketReducer';
-import { BasketContext } from '../../../store/BasketContext';
+import { addToBasket } from '../../../store/basket/basketSlice';
 import Button from '../../UI/Button';
 
 const MealItemForm = ({id, title, price}) => {

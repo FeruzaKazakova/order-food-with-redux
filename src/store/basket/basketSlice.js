@@ -1,32 +1,27 @@
+import { createSlice } from "@reduxjs/toolkit"
 import { fetchApi } from "../../lib/fetchApi"
-
-export const basketActionTypes = {
-    ADD_ITEM_SUCCESS: "ADD_ITEM_SUCCESS",
-    GET_ITEM_SUCCESS: "GET_ITEM_SUCCESS"
-}
 
 const initialState = {
     items: []
 }
 
-export const basketReducer = (state=initialState, action) => {
-    switch(action.type){
-            case basketActionTypes.GET_ITEM_SUCCESS:
-                return{
-                    ...state,
-                    items: action.payload
-                }
-
-        default: 
-        return state
+export const basketSlice = createSlice({
+    name: "basket",
+    initialState,
+    reducers: {
+        getBasketSuccess(state, action){
+            state.items = action.payload
+        }
     }
-}
+})
+
+export const basketActions = basketSlice.actions
 
 export const getBasket = () => async (dispatch) => {
     try{
         const { data } = await fetchApi('basket')
 
-        dispatch({type: basketActionTypes.GET_ITEM_SUCCESS, payload: data.items})
+        dispatch(basketActions.getBasketSuccess(data.items))
 
     } catch (error){
         console.log(error);
