@@ -1,10 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import { fetchApi } from "../../lib/fetchApi"
 
-export const mealsActionTypes = {
-    GET_MEALS: "GET_MEALS",
-}
-
 const initialState = {
     meals: [],
     isLoading: false,
@@ -14,27 +10,13 @@ const initialState = {
 export const mealsSlice = createSlice({
     name: "meals",
     initialState,
-    // reducers: {
-    //     getMealsStarted(state){
-    //         state.isLoading = true
-    //     },
-    //     getMealsSuccess(state, action){
-    //         state.meals = action.payload
-    //         state.isLoading = false
-    //         state.error = ""
-    //     },
-    //     getMealsFailed(state, action){
-    //         state.isLoading =  false
-    //         state.error = action.payload
-    //     },
-    // },
     extraReducers: (builder) => {
         builder.addCase(getMeals.fulfilled, (state, action) => {
             state.meals = action.payload
             state.isLoading = false
             state.error = ""
         })
-        builder.addCase(getMeals.pending, (state, action) =>{
+        builder.addCase(getMeals.pending, (state) =>{
             state.isLoading = true
         })
         builder.addCase(getMeals.rejected, (state, action) => {

@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useState } from 'react'
+import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import {ReactComponent as PlusIcon} from '../../../assets/icons/plus-icon.svg'
@@ -10,11 +10,11 @@ const MealItemForm = ({id, title, price}) => {
 
     const [amount, setAmount] = useState(1)
 
-    const amountChangeHandler = useCallback((event) => {
+    const amountChangeHandler =(event) => {
         setAmount(event.target.value)
-    }, [])
+    }
 
-    const submitHandler = useCallback((event) => {
+    const submitHandler = (event) => {
         event.preventDefault()
 
         const basketItem = {
@@ -25,7 +25,7 @@ const MealItemForm = ({id, title, price}) => {
         }
 
         dispatch(addToBasket(basketItem))
-    },[addToBasket,id,price,title,amount])
+    }
 
   return( 
   <StyledForm onSubmit={submitHandler}>

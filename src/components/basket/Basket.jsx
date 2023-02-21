@@ -1,9 +1,10 @@
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
-import { deleteBasketItem, updateBasketItem } from "../../store/basket/basketSlice";
+import { deleteBasketItem, submitOrder, updateBasketItem } from "../../store/basket/basketSlice";
 import Modal from "../UI/Modal";
 import BasketItem from "./BasketItem";
 import TotalAmount from "./TotalAmount";
+import { uiActions } from "../../store/ui/uiSlice";
 
 const Basket = ({onClose}) => {
     const items = useSelector((state) => state.basket.items)
@@ -24,7 +25,25 @@ const Basket = ({onClose}) => {
         dispatch(updateBasketItem({amount: amount + 1, id}))
     }
 
+    const orderSubmitHandler = async() => {
+        try{
+            await dispatch(submitOrder({ordreData:{items}
+            })).unwrap()
+
+            dispatch(uiActions.showSnackbar({
+                severity: "success",
+                message: "Order completed successfully!" }))
+        }catch(error){
+            dispatch(uiActions.showSnackbar({
+                severity: "error",
+                message: "Failed. Try again later" }))
+        }finally{
+            onClose()
+        }
+    }
+
     return( 
+        <>
     <Modal onClose={onClose}>
         <Content>
             {items.length ? 
@@ -38,13 +57,15 @@ const Basket = ({onClose}) => {
                 price={item.price} 
                 amount={item.amount}
                 />
-            ); 
+            );
         })}
         </FixedHeightContainer>) : null}
-        <TotalAmount price={getTotalPrice()} onClose={onClose} onOrder={() => {}} />
+        <TotalAmount price={getTotalPrice()} onClose={onClose} onOrder={orderSubmitHandler} />
         
         </Content>
-    </Modal>
+
+        </Modal>
+    </>
     )
 }
 

@@ -2,7 +2,7 @@ import { createPortal } from "react-dom"
 import styled from "styled-components"
 
 const StyledBackdrop = styled.div`
-position: fixed;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;

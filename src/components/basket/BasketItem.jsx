@@ -2,7 +2,6 @@ import styled from "styled-components";
 import Button from "../UI/Button"
 import { ReactComponent as DecreaseAmountIcon } from "../../assets/icons/minus.svg";
 import { ReactComponent as IncreaseAmountIcon } from "../../assets/icons/plus.svg";
-import { memo } from "react";
 
 const BasketItem = ({title, price, amount, decreaseAmount, increaseAmount}) => {
 

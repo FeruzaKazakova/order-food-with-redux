@@ -1,10 +1,12 @@
 import { mealsSlice } from "./meals/mealsSlice";
 import { basketSlice } from "./basket/basketSlice";
 import { configureStore } from "@reduxjs/toolkit";
+import { uiSlice } from "./ui/uiSlice";
 
 export const store = configureStore({
-  reducer:{
+  reducer: {
     meals: mealsSlice.reducer,
     basket: basketSlice.reducer,
-  }
-})
+    [uiSlice.name]: uiSlice.reducer,
+  },
+});
