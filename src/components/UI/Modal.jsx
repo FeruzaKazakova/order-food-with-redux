@@ -1,15 +1,6 @@
-import { createPortal } from "react-dom"
 import styled from "styled-components"
-
-const StyledBackdrop = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100vh;
-  z-index: 20;
-  background-color: rgba(0, 0, 0, 0.75);
-`
+import { Modal as MuiModal} from "@mui/material"
+import { Box } from "@mui/material"
 
 const ModalContent = ({children}) => {
     return <StyledModalContent>{children}</StyledModalContent>
@@ -39,14 +30,18 @@ const StyledModalContent = styled.div`
   }
 }
 `
-const backdropRoot = document.getElementById('backdrop');
-const modalOverlayRoot = document.getElementById('modal-overlay')
 
-const Modal = ({children, onClose}) => {
+const Modal = ({children, onClose, open}) => {
   return (
     <>
-    {createPortal(<StyledBackdrop onClick={onClose}/>, backdropRoot)}
-    {createPortal(<ModalContent>{children}</ModalContent>, modalOverlayRoot)}
+    <MuiModal
+        open={open}
+        onClose={onClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+          <Box><ModalContent>{children}</ModalContent></Box>
+      </MuiModal>
     </>
   )
 }

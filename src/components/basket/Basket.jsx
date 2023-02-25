@@ -6,7 +6,7 @@ import BasketItem from "./BasketItem";
 import TotalAmount from "./TotalAmount";
 import { uiActions } from "../../store/ui/uiSlice";
 
-const Basket = ({onClose}) => {
+const Basket = ({onClose, open}) => {
     const items = useSelector((state) => state.basket.items)
     const dispatch = useDispatch()
 
@@ -33,6 +33,7 @@ const Basket = ({onClose}) => {
             dispatch(uiActions.showSnackbar({
                 severity: "success",
                 message: "Order completed successfully!" }))
+                
         }catch(error){
             dispatch(uiActions.showSnackbar({
                 severity: "error",
@@ -44,7 +45,7 @@ const Basket = ({onClose}) => {
 
     return( 
         <>
-    <Modal onClose={onClose}>
+    <Modal open={open} onClose={onClose}>
         <Content>
             {items.length ? 
             (<FixedHeightContainer>

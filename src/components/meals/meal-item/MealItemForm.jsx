@@ -1,6 +1,8 @@
+import { TextField } from '@mui/material';
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
-import styled from 'styled-components';
+import styledComponents from 'styled-components';
+import {styled} from '@mui/system';
 import {ReactComponent as PlusIcon} from '../../../assets/icons/plus-icon.svg'
 import { addToBasket } from '../../../store/basket/basketSlice';
 import Button from '../../UI/Button';
@@ -31,15 +33,16 @@ const MealItemForm = ({id, title, price}) => {
   <StyledForm onSubmit={submitHandler}>
     <Container>
         <label htmlFor={id}>Amount</label>
-        <input value={amount} 
-        onChange={amountChangeHandler} 
-        type="number" 
-        id={id} 
-        min={1} 
-        max={5} 
-        defaultValue={1}/>
+            <StyledTextField
+            value={amount} 
+            onChange={amountChangeHandler} 
+            id={id}
+            type="number"
+           InputLabelProps={{
+            shrink: true,
+          }}/>
     </Container>
-        <Button>
+        <Button onClick={submitHandler}>
             <StyledIcon/>Add
         </Button>
      </StyledForm>
@@ -48,11 +51,16 @@ const MealItemForm = ({id, title, price}) => {
 
 export default MealItemForm;
 
-const StyledIcon = styled(PlusIcon)`
+const StyledTextField = styled(TextField)(() => ({
+    width:"60px",
+    marginTop:"-0.6rem"
+}))
+
+const StyledIcon = styledComponents(PlusIcon)`
     margin-right: 10px;
 `
 
-const Container = styled.div`
+const Container = styledComponents.div`
     margin-bottom: 12px;
     label{
     font-family: 'Poppins';
@@ -76,7 +84,7 @@ const Container = styled.div`
     }
 `
 
-const StyledForm = styled.form`
+const StyledForm = styledComponents.form`
     display: flex;
     flex-direction: column;
     align-items: flex-end;

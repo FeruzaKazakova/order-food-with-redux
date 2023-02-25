@@ -1,4 +1,5 @@
-import styled from "styled-components"
+import {styled} from '@mui/system'
+import { Button as MuiButton } from '@mui/material';
 
 const Button = ({children, variant='contained', borderStyle="rounded", ...restProps}) => {
   return <StyledButton variant={variant} borderStyle={borderStyle} {...restProps}>{children}</StyledButton>
@@ -15,33 +16,32 @@ const getBorder = (props) => {
 }
 
 const getColor = (props) => {
-  return props.variant === "contained" ? "white" : "#8A2B06"
+  return props.variant === "contained" ? "white" : "38A2B06"
 }
 
 const getBorderValues = (props) => {
-  return props.borderStyle ==="rounded" ? "20px" : "6px"
+  return props.borderStyle ==="rounded" ? "20px" : "16px"
 }
 
-const StyledButton = styled.button`
-    background-color: ${getBackgroundColor} ;
-    border-radius: ${getBorderValues};
-    padding: 10px 26px;
-    border: ${getBorder};
+const StyledButton = styled(MuiButton)(({variant, borderStyle} ) => ({
+  padding:' 10px 26px',
+  fontWeight: '600',
+  fontSize: '16px',
+  lineHeight: '24px',
+  color: getColor(variant),
+  border: getBorder(variant),
+  backgroundColor: getBackgroundColor(variant),
+  backgroundColor: "#8A2B06",
+  color: "white",
+  borderRadius: getBorderValues(borderStyle),
 
-    font-weight: 600;
-    font-size: 16px;
-    line-height: 24px;
-    color: ${getColor};
-    cursor: pointer;
-    text-align: center;
-    display: flex;
-    align-items: center;
-  &:hover{
-    background-color: #7E2A0A;
-    color: white;
+  '&:hover' : {
+    backgroundColor: '#bb3c0e',
+    color: '#fff',
+  },
+
+  '&:active' : {
+    backgroundColor: '#6b290f',
+    color: '#fff',
   }
-    &:active{
-    background: #993108;
-    border-radius: 20px;
-  }
-`
+}))
