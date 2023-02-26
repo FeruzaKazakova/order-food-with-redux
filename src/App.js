@@ -1,42 +1,41 @@
 import { Snackbar } from "./components/UI/Snackbar";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { createTheme, ThemeProvider } from '@mui/material';
 import styled from "styled-components";
 import Basket from "./components/basket/Basket";
 import Header from "./components/header/Header";
 import Meals from "./components/meals/Meals";
 import Summary from "./components/summary/Summary";
 import { uiActions } from "./store/ui/uiSlice";
-
-import {Box} from '@mui/material';
-import {Button} from '@mui/material';
-import {Typography} from '@mui/material';
-import {Modal} from '@mui/material';
-
-
-const style = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 400,
-  bgcolor: 'background.paper',
-  border: '2px solid #000',
-  boxShadow: 24,
-  p: 4,
-};
+import { darkTheme, lightTheme } from "./lib/theme";
 
 function App() {
   const snackbar = useSelector((state) => state.ui.snackbar);
   const dispatch = useDispatch();
   const [isBasketVisible, setBasketVisible] = useState(false);
+  const themeMode = useSelector((state) => state.ui.themeMode)
 
   const showBasketHandler = () => {
     setBasketVisible((prevState) => !prevState);
   };
 
+  const theme = useMemo(() => {
+    const currentTheme = 
+    themeMode === 'light'
+    ? {
+      ...lightTheme
+      }
+    : {
+      ...darkTheme
+    }
+
+    return createTheme(currentTheme)
+  }, [themeMode])
+
   return (
     <div>
+      <ThemeProvider theme={theme}>
       <Header onShowBasket={showBasketHandler} />
       <Content>
         <Summary />
@@ -49,6 +48,7 @@ function App() {
           onClose={() => dispatch(uiActions.closeSnackbar())}
         />
       </Content>
+      </ThemeProvider>
     </div>
   );
 }

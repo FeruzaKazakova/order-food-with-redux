@@ -1,4 +1,4 @@
-import styled from "styled-components"
+import {styled} from '@mui/system'
 
 const SummaryInfoCard = () => {
   return <Card>
@@ -14,29 +14,30 @@ const SummaryInfoCard = () => {
 
 export default SummaryInfoCard
 
-const Card = styled.div`
-    max-width: 52.375rem;
-    background-color: #383838;
-    padding: 36px 54px;
-    box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.3);
-    border-radius: 16px;
-    position: relative;
-    margin: -12rem auto;
+const Card = styled("div")(({theme}) => ({
+    maxWidth: '52.375rem',
+    backgroundColor:  theme.palette.success.dark,
+    padding: '36px 54px',
+    boxShadow: '0px 6px 16px rgba(0, 0, 0, 0.3)',
+    borderRadius: '16px',
+    position: 'relative',
+    margin: '-12rem auto',
 
-    font-family: 'Poppins';
-    font-style: normal;
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 24px;
-    text-align: center;
-    color: #FFFFFF;
-`
-const StyledTitle = styled.h2`
-    font-family: 'Poppins';
-    font-style: normal;
-    font-weight: 600;
-    font-size: 36px;
-    line-height: 54px;
+    fontFamily: 'Poppins',
+    fontStyle: 'normal',
+    fontWeight: 500,
+    fontSize: '16px',
+    lineHeight: '24px',
+    textAlign: 'center',
+    color: theme.palette.primary.contrastText,
+  }))
 
-    color: #FFFFFF;
-`
+const StyledTitle = styled("h2")(({theme}) => ({
+    fontFamily: 'Poppins',
+    fontStyle: 'normal',
+    fontWeight: 600,
+    fontSize: '36px',
+    lineHeight: '54px',
+
+    color: theme.palette.primary.contrastText,
+  }))

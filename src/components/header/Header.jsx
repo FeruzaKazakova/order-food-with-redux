@@ -1,13 +1,18 @@
+import { Button } from "@mui/material";
+import {styled} from '@mui/system'
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import styled from "styled-components";
+import styledComponents from "styled-components";
+import { getTheme } from "../../lib/theme";
 import { getBasket } from "../../store/basket/basketSlice";
+import { uiActions } from "../../store/ui/uiSlice";
 import BasketButton from "./BasketButton";
 
 const Header = ({onShowBasket}) => {
     const dispatch = useDispatch()
     const items = useSelector((state) => state.basket.items)
     const [animationClass, setAnimationClass] = useState("")
+    const themeMode = useSelector((state) => state.ui.themeMode)
 
     useEffect(()=>{
         dispatch(getBasket())
@@ -32,29 +37,55 @@ const Header = ({onShowBasket}) => {
     }
     }, [items])
 
+    const themeChangeHandler = () => {
+        const theme = themeMode === "light" ? "dark" : "light";
+        dispatch(uiActions.changeTheme(theme))
+    }
+
     return <Container>
         <Logo>ReactMeals</Logo>
+        <StyledButton onClick={themeChangeHandler}>{themeMode === "light" ? "Dark Mode" : "Light Mode"}</StyledButton>
         <BasketButton className={animationClass} onClick={onShowBasket} count={calculateTotalAmount()}/>
     </Container>
 }
 
 export default Header;
 
-const Container = styled.header`
-    width: 100%;
-    height: 101px;
-    background-color: #8A2B06;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-left: 120px;
-    padding-right: 120px;
-    position: fixed;
-    z-index: 1;
-    top: 0;
-`
+const StyledButton = styled(Button)(({theme}) => ({
+    padding:' 10px 26px',
+    fontWeight: '600',
+    fontSize: '16px',
+    lineHeight: '24px',
+    color: 'white',
+    border: 'none',
+    backgroundColor:`${getTheme().palette.primary.dark}`,
+  
+    '&:hover' : {
+        backgroundColor: theme.palette.primary.light,
+        color: theme.palette.primary.contrastText,
+      },
+    
+      '&:active' : {
+        backgroundColor: theme.palette.secondary.dark,
+        color: theme.palette.primary.contrastText,
+      }
+  }))
 
-const Logo = styled.p`
+const Container = styled("div")(({theme}) => ({
+    width: '100%',
+    height: '101px',
+    backgroundColor: theme.palette.primary.main,
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingLeft: '120px',
+    paddingRight: '120px',
+    position: 'fixed',
+    zIndex: '1',
+    top: '0',
+}))
+
+const Logo = styledComponents.p`
     font-weight: 600;
     font-size: 38px;
     line-height: 57px;

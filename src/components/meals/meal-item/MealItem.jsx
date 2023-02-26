@@ -1,5 +1,6 @@
-import styled from 'styled-components';
+import styledComp from 'styled-components';
 import MealItemForm from './MealItemForm';
+import {styled} from '@mui/system';
 
 const MealItem = ({meal}) => {
 
@@ -17,7 +18,7 @@ const MealItem = ({meal}) => {
 
 export default MealItem;
 
-const Container = styled.li`
+const Container = styledComp.li`
     list-style: none;
     display: flex;
     justify-content: space-between;
@@ -30,7 +31,7 @@ const Container = styled.li`
     }
 `
 
-const StyledItemInfo = styled.div`
+const StyledItemInfo = styledComp.div`
     margin-bottom: 20px;
     p{
     font-family: 'Poppins';
@@ -43,7 +44,7 @@ const StyledItemInfo = styled.div`
     }
 `
 
-const StyledTitle = styled.h4`
+const StyledTitle = styledComp.h4`
     font-family: 'Poppins';
     font-style: normal;
     font-weight: 600;
@@ -52,11 +53,11 @@ const StyledTitle = styled.h4`
     color: #222222;
     margin: 0px 0px 4px 0px;
 `
-const StyledPrice = styled.span`
-    font-family: 'Poppins';
-    font-style: normal;
-    font-weight: 700;
-    font-size: 20px;
-    line-height: 30px;
-    color: #AD5502;
-`
+const StyledPrice = styled("span")(({theme}) => ({
+    fontFamily: 'Poppins',
+    fontStyle: 'normal',
+    fontWeight: 700,
+    fontSize: '20px',
+    lineHeight: '30px',
+    color: theme.palette.primary.light,
+}))

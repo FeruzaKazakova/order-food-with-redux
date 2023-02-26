@@ -23,7 +23,7 @@ const getBorderValues = (props) => {
   return props.borderStyle ==="rounded" ? "20px" : "16px"
 }
 
-const StyledButton = styled(MuiButton)(({variant, borderStyle} ) => ({
+const StyledButton = styled(MuiButton)(({variant, borderStyle, theme} ) => ({
   padding:' 10px 26px',
   fontWeight: '600',
   fontSize: '16px',
@@ -31,17 +31,17 @@ const StyledButton = styled(MuiButton)(({variant, borderStyle} ) => ({
   color: getColor(variant),
   border: getBorder(variant),
   backgroundColor: getBackgroundColor(variant),
-  backgroundColor: "#8A2B06",
+  backgroundColor: theme.palette.primary.main,
   color: "white",
   borderRadius: getBorderValues(borderStyle),
 
   '&:hover' : {
-    backgroundColor: '#bb3c0e',
-    color: '#fff',
+    backgroundColor: theme.palette.primary.light,
+    color: theme.palette.primary.contrastText,
   },
 
   '&:active' : {
     backgroundColor: '#6b290f',
-    color: '#fff',
+    color: theme.palette.primary.contrastText,
   }
 }))

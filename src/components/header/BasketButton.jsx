@@ -1,4 +1,3 @@
-import styledComponents from 'styled-components';
 import {styled} from '@mui/system';
 import { Button as MuiButton } from '@mui/material'
 import { ReactComponent as BasketIcon } from '../../assets/icons/basket-icon.svg'
@@ -13,8 +12,8 @@ const BasketButton = ({count, ...restProps}) => {
 
 export default BasketButton;
 
-const StyledButton = styled(MuiButton)(() => ({
-    backgroundColor: '#5A1F08',
+const StyledButton = styled(MuiButton)(({theme}) => ({
+    backgroundColor: theme.palette.primary.dark,
     borderRadius: '30px',
     padding: '12px 32px',
     border: 'none',
@@ -29,10 +28,10 @@ const StyledButton = styled(MuiButton)(() => ({
     alignItems: 'center',
 
     '&:hover':{
-        backgroundColor: '#2c0d00'
+      backgroundColor: theme.palette.secondary.dark
     },
     '&:hover > #counter':{
-      backgroundColor: '#5e2913'
+      backgroundColor: theme.palette.secondary.main
   },
     '&.bump': {
     animation: 'bump 300ms ease-out'
@@ -57,16 +56,16 @@ const StyledButton = styled(MuiButton)(() => ({
 
 }))
 
-const StyledTitle = styledComponents.span`
-    margin-left: 12px;
-    margin-right: 24px;
-    color: white;
-`
-const StyledCounter = styledComponents.span`
-    background: #8A2B06;
-    border-radius: 30px;
-    font-weight: 700;
-    font-size: 20px;
-    line-height: 27px;
-    padding: 4px 20px;
-`
+const StyledTitle = styled('span')(({theme}) => ({
+    marginLeft: '12px',
+    marginRight: '24px',
+    color: theme.palette.primary.contrastText,
+  }))
+const StyledCounter = styled('span')(({theme}) => ({
+    backgroundColor: theme.palette.primary.main,
+    borderRadius: '30px',
+    fontWeight: 700,
+    fontSize: '20px',
+    lineHeight: '27px',
+    padding: '4px 20px'
+  }))
