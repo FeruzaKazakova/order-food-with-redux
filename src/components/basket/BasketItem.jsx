@@ -1,5 +1,6 @@
-import styled from "styled-components";
+import styledComp from "styled-components";
 import Button from "../UI/Button"
+import {styled} from '@mui/system'
 // import { ReactComponent as DecreaseAmountIcon } from "../../assets/icons/minus.svg";
 // import { ReactComponent as IncreaseAmountIcon } from "../../assets/icons/plus.svg";
 
@@ -26,12 +27,12 @@ const BasketItem = ({title, price, amount, decreaseAmount, increaseAmount}) => {
 
 export default BasketItem;
 
-const Container = styled.div`
+const Container = styledComp.div`
     padding: 24px 0px;
     width: 95%;
     border-bottom: 1px solid #D6D6D6;
 `
-const Title = styled.p`
+const Title = styledComp.p`
     font-family: 'Poppins';
     font-style: normal;
     font-weight: 600;
@@ -40,15 +41,16 @@ const Title = styled.p`
     color: #222222;
     margin: 0 0 -10px 0;
 `
-const Price = styled.p`
-    font-family: 'Poppins';
-    font-style: normal;
-    font-weight: 600;
-    font-size: 22px;
-    line-height: 33px;
-    color: #8A2B06;
-`
-const Amount = styled.span`
+const Price = styled("p")(({theme}) => ({
+    fontFamily: 'Poppins',
+    fontStyle: 'normal',
+    fontWeight: '600',
+    fontSize: '22px',
+    lineHeight: '33px',
+    color: theme.palette.primary.main
+}))
+
+const Amount = styledComp.span`
     font-family: 'Poppins';
     font-style: normal;
     font-weight: 500;
@@ -61,17 +63,17 @@ const Amount = styled.span`
     border-radius: 6px;
 `
 
-const PriceAndAmountContainer = styled.div`
+const PriceAndAmountContainer = styledComp.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
     width: 153px;
 `
-const CounterContainer = styled.div`
+const CounterContainer = styledComp.div`
     display: flex;
     gap:14px;
 `
-const Content = styled.div`
+const Content = styledComp.div`
     display: flex;
     justify-content: space-between;
     align-items: center;

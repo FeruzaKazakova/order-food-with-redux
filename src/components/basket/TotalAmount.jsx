@@ -1,5 +1,6 @@
-import styled from "styled-components";
+import styledComp from "styled-components";
 import Button from "../UI/Button"
+import {styled} from '@mui/system'
 
 const TotalAmount = ({price, onClose, onOrder}) => {
     const orderButton = price > 0 ? <Button onClick={onOrder}>Order</Button> : null;
@@ -22,7 +23,7 @@ const TotalAmount = ({price, onClose, onOrder}) => {
 
 export default TotalAmount;
 
-const Label = styled.p`
+const Label = styledComp.p`
   font-family: 'Poppins';
   font-style: normal;
   font-weight: 700;
@@ -32,21 +33,22 @@ const Label = styled.p`
   color: #222222;
   margin: 0;
 `
-const Price = styled.p`
-    font-family: 'Poppins';
-    font-style: normal;
-    font-weight: 600;
-    font-size: 22px;
-    line-height: 33px;
-    color: #8A2B06;
-    margin: 0;
-`
 
-const InfoContainer = styled.div`
+const Price = styled("p")(({theme}) => ({
+    fontFamily: 'Poppins',
+    fontStyle: 'normal',
+    fontWeight: '600',
+    fontSize: '22px',
+    lineHeight: '33px',
+    margin: 0,
+    color: theme.palette.primary.main
+}))
+
+const InfoContainer = styledComp.div`
     display: flex;
     justify-content: space-between;
 `
-const ActionButtonsCpntainer = styled.div`
+const ActionButtonsCpntainer = styledComp.div`
     display: flex;
     justify-content: flex-end;
     margin-top: 24px;
